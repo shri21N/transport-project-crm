@@ -66,7 +66,7 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Mount Routes
+// Mount Routes (Supports both /api/* and root /*)
 app.use('/api/auth', authRoutes);
 app.use('/api/customers', customerRoutes);
 app.use('/api/vehicles', vehicleRoutes);
@@ -75,6 +75,16 @@ app.use('/api/bookings', bookingRoutes);
 app.use('/api/invoices', invoiceRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+
+// Root path aliases in case frontend VITE_API_BASE_URL is set without /api
+app.use('/auth', authRoutes);
+app.use('/customers', customerRoutes);
+app.use('/vehicles', vehicleRoutes);
+app.use('/drivers', driverRoutes);
+app.use('/bookings', bookingRoutes);
+app.use('/invoices', invoiceRoutes);
+app.use('/notifications', notificationRoutes);
+app.use('/dashboard', dashboardRoutes);
 
 // Global Error Handler
 app.use(errorHandler);
